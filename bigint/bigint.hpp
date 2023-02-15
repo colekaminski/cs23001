@@ -1,3 +1,5 @@
+
+
 //Cole Kaminski
 //February 6, 2023
 //Computer Science 2
@@ -22,6 +24,9 @@ public:
     void debugPrint(std::ostream&) const;                           //Debug method function to print values for bigint
     friend std::ostream& operator<<(std::ostream&, const bigint&);  //Friend function used to output bigint after accepting a stream
     friend bool operator==(const bigint&, const bigint&);           //Overloaded operator function used to compare two bigint instances
+    friend std::istream& operator>>(std::istream&, bigint&);        //milestone 2
+    friend bigint operator+(const bigint&, const bigint&);          //milestone 2
+    int operator[](const int) const;		               	    //milestone 2
 
 private:
 
