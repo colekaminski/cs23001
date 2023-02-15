@@ -4,7 +4,7 @@
 //
 // Basics for openning a file for milestone 2
 //
-
+/*
 #include <iostream> 
 #include <fstream>
 #include <cstdlib>
@@ -28,3 +28,4 @@ int main() {
     return 0;
 }
 
+*/
