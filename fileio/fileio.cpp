@@ -52,4 +52,6 @@ void addTwoInts() {
         in>>delim;
         std::cout<< (lhs+rhs) << std::endl;
     }
+in.close();
+return 0;
 }
