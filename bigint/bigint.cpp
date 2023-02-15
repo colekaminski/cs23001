@@ -1,6 +1,3 @@
-
-
-
 //Cole Kaminski
 //February 6, 2023
 //Computer Science 2
