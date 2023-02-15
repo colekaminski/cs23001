@@ -53,5 +53,4 @@ void addTwoInts() {
         std::cout<< (lhs+rhs) << std::endl;
     }
 in.close();
-return 0;
 }
