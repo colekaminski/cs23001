@@ -76,4 +76,40 @@ bool operator==(const bigint& big1, const bigint& big2) {       //overloaded ope
 	return true;
 }
 
+std::istream& operator>>(std::istream& stream, bigint& output) {      //Milestone 2
+	char digit;
+	char input[CAPACITY];
+	int index = 0;
+	do {
+		stream >> digit;
+		if (digit != ';') {
+			input[index] = digit;
+			++index;
+		}
+	} while (digit != ';');
+	for (int i = index - 1; i >= 0; --i) {
+		output.data[index - 1 - i] = int(input[i]) - int('0');
+	}
 
+	for (int i = index; i < CAPACITY; ++i) {
+		output.data[i] = 0;
+	}
+
+	return stream;
+
+}
+
+bigint operator+(const bigint& lhs, const bigint& rhs) {         //Milestone 2
+	bigint sum;
+	int carryValue = 0;
+	for (int i = 0; i < CAPACITY; ++i) {
+		int digitSum = lhs.data[i] + rhs.data[i] + carryValue;
+		sum.data[i] = digitSum % 10;
+		carryValue = digitSum / 10;
+	}
+	return sum;
+}
+
+int bigint::operator[](const int index) const {         //Milestone 2
+	return data[index];
+}
