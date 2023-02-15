@@ -1,25 +1,55 @@
 //CS23001
 //LAB 4
 //COLE KAMINSKI
-//FEBRUARY 8, 2022
+//FEBRUARY 8, 2023
+
+#include <iostream>
+#include <fstream>
 
 
+void readToSpace();
+void addTwoInts();
 
- int main() {
+int main() {
+	readToSpace();
+    addTwoInts();
+	return 0;
+}
 
-    std::ifstream file ("data1-1.txt");
-    if(!file.is_open()) {
-        std::cout << "Unable to open file\n";
-        return 1;
+void readToSpace() {
+	std::ifstream file("fileio-text.txt");
+	if (!file.is_open()) {
+		std::cout << "Unable to open file\n";
+		return;
+	}
+	char fileChar;
+	while (!file.eof()) {
+		while (file.get(fileChar)) {
+			if (fileChar == ' ') {
+				std::cout << std::endl;
+			}
+			else {
+				std::cout << fileChar;
+			}
+		}
+		std::cout << std::endl;
+	}
+	file.close();
+}
+
+void addTwoInts() {
+	std::ifstream in("fileio-data-1.txt");
+	if (!in.is_open()) {
+		std::cout << "Unable to open file\n";
+		return;
+	}
+	int lhs, rhs;
+	char delim;
+    while (!in.eof()) {
+        in>>lhs;
+        in>>delim;
+        in>>rhs;
+        in>>delim;
+        std::cout<< (lhs+rhs) << std::endl;
     }
-
-    char ch;
-    file.get(ch);
-    while(!file.eof()) {
-        std::cout << ch;
-        file.get(ch);
-    }
-    std::cout << '\n';
-    file.close();
-    return 0;
-  }
+}
