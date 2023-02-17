@@ -3,7 +3,7 @@ Grades are out of 100% - Comments are mostly for why points were taken off.
 P1
 
 m1: 50 - doesnt compile -> missing test file -> remember to double-check in wasp/hornet and web that everything commits correctly;
-m2: 
+m2: 90 - add.cpp reading in numbers wrong, sums fine;
 m3: 
 
 bonus: 
