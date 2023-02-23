@@ -4,7 +4,7 @@ P1
 
 m1: 90 (regrade)
 m2: 90 - add.cpp reading in numbers wrong, sums fine;
-m3: 
+m3: 0 - no m3 implementations; no multiply.cpp; no test cases added for times10 and digit;
 
 bonus: 
 
