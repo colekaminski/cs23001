@@ -18,14 +18,14 @@ int main() {
         exit(1);
     }
     bigint lhs, rhs;
-    char delim;
+   // char delim;
     while (!in.eof()) {
         in>>lhs;
         std::cout<< "Value of first bigint: " << lhs<<std::endl<<std::endl;
-        in>>delim;
+        //in>>delim;
         in>>rhs;
         std::cout<< "Value of second bigint: " << rhs<<std::endl<<std::endl;
-        in>>delim;
+        //in>>delim;
         std::cout<< "The sum of both bigint's are: "<< (lhs+rhs) << std::endl << "______________________________"<<std::endl;
     }
     in.close();

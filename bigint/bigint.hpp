@@ -26,7 +26,7 @@ public:
     friend bool operator==(const bigint&, const bigint&);           //Overloaded operator function used to compare two bigint instances
     friend std::istream& operator>>(std::istream&, bigint&);        //milestone 2
     friend bigint operator+(const bigint&, const bigint&);          //milestone 2
-    int operator[](const int) const;		               	    //milestone 2
+    int operator[](const int) const;		               	        //milestone 2
 
 private:
 
