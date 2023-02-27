@@ -1,8 +1,9 @@
+
 //Cole Kaminski
-//February 6, 2023
+//February 23, 2023
 //Computer Science 2
-		//Project 1 - BIGINT
-		//Milestone 1
+		//Project 1
+		//Milestone 3 + bonus
 //This file is the CPP for bigint that includes all out of line definitions for bigint class
 #include "bigint.hpp"
 
@@ -73,7 +74,7 @@ bool operator==(const bigint& big1, const bigint& big2) {       //overloaded ope
 	return true;
 }
 
-std::istream& operator>>(std::istream& stream, bigint& output) {      //Milestone 2
+std::istream& operator>>(std::istream& stream, bigint& output) {
 	char digit;
 	char input[CAPACITY];
 	int index = 0;
@@ -96,7 +97,7 @@ std::istream& operator>>(std::istream& stream, bigint& output) {      //Mileston
 
 }
 
-bigint operator+(const bigint& lhs, const bigint& rhs) {         //Milestone 2
+bigint operator+(const bigint& lhs, const bigint& rhs) {
 	bigint sum;
 	int carryValue = 0;
 	for (int i = 0; i < CAPACITY; ++i) {
@@ -107,6 +108,58 @@ bigint operator+(const bigint& lhs, const bigint& rhs) {         //Milestone 2
 	return sum;
 }
 
-int bigint::operator[](const int index) const {         //Milestone 2
+int bigint::operator[](const int index) const {
 	return data[index];
+}
+
+//Milestone 3 function definitions below
+
+bigint bigint::timesDigit(int timesNum) const {
+	bigint product;
+	int carryValue = 0;
+	for (int i = 0; i < CAPACITY; ++i) {
+		int digitProduct = data[i] * timesNum + carryValue;
+		product.data[i] = digitProduct % 10;
+		carryValue = digitProduct / 10;
+	}
+	return product;
+}
+
+bigint bigint::times10(int numZeros) const {
+	bigint newBigint;
+	for (int i = (CAPACITY - 1 - numZeros); i >= 0; --i) {
+		newBigint.data[i + numZeros] = data[i];
+
+	}
+	return newBigint;
+}
+
+int findTrailZeros(bigint b) {
+	int trailZeroSum = 0;
+	int i = 0;
+	do {
+		if (b.data[i] == 0) {
+			++trailZeroSum;
+			++i;
+		}
+
+	} while (b.data[i] == 0);
+	return trailZeroSum;
+}
+
+bigint operator*(const bigint& lhs, const bigint& rhs) {
+	bigint product;
+	for (int i = 0; i < CAPACITY - 1; ++i) {
+		bigint temp = lhs.timesDigit(rhs.data[i]);
+		product = product + temp.times10(i);
+	}
+	return product;
+}
+
+
+bigint nfact(int num) {
+	if (num == 1)
+		return 1;
+	else
+		return num * nfact(num - 1);
 }
