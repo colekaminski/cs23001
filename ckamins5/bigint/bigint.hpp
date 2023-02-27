@@ -39,6 +39,6 @@ private:
 
 };
 
-bigint nfact(int);
+bigint nfact(int);                                          //Extra credit
 
 #endif /*BIGINT_HPP*/

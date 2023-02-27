@@ -160,6 +160,6 @@ bigint operator*(const bigint& lhs, const bigint& rhs) {
 bigint nfact(int num) {
 	if (num == 1)
 		return 1;
-	else
+	else 
 		return num * nfact(num - 1);
 }
