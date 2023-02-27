@@ -172,38 +172,58 @@ int main() {
 		assert(digit2 == 7);
 		assert(digit3 == 2);
 	}
-	//Added a few test cases utilizing multiplication. Don't have the function added for it yet though
-	/*
 		{
-			//Setup
-			bigint bi1("0005"); bigint bi2("0005"); bigint total = bi1 * bi2;
-			// Test
-			int digit1 = bi1[0]; int digit2 = bi2[0]; int digit3 = total[0];
-			// Verify
-			assert(bi1 == 5); assert(bi2 == 5); assert(total == 25); assert(digit1 == 5); assert(digit2 == 5); assert(digit3 == 2);
+		//Setup
+		bigint bi1("0005"); 
+		bigint bi2("0005"); 
+		bigint total = bi1 * bi2;
+		// Test
+		int digit1 = bi1[0]; 
+		int digit2 = bi2[0]; 
+		int digit3 = total[0];
+		// Verify
+		assert(bi1 == 5);
+		assert(bi2 == 5); 
+		assert(total == 25); 
+		assert(digit1 == 5); 
+		assert(digit2 == 5); 
+		assert(digit3 == 5);
 		}
 		{
-			//Setup
-			bigint bi1(15); bigint bi2("4"); bigint total = bi1 * bi2;
-			// Test
-			int digit1 = bi1[1]; int digit2 = bi2[0]; int digit3 = total[0];
-			// Verify
-			assert(bi1 == 15); assert(bi2 == 4); assert(total == 60); assert(digit1 == 5); assert(digit2 == 4); assert(digit3 == 6);
+		//Setup
+		bigint bi1(15); 
+		bigint bi2("4"); 
+		bigint total = bi1 * bi2;
+		// Test
+		int digit1 = bi1[1];
+		int digit2 = bi2[0]; 
+		int digit3 = total[0];
+		// Verify
+		assert(bi1 == 15);
+		assert(bi2 == 4);
+		assert(total == 60); 
+		assert(digit1 == 1);
+		assert(digit2 == 4);
+		assert(digit3 == 0);
 		}
 		{
-			//Setup
-			bigint bi1("0"); bigint bi2(0); bigint total = bi1 * bi2;
-			// Test
-			int digit1 = bi1[0]; int digit2 = bi2[0]; int digit3 = total[0];
-			// Verify
-			assert(bi1 == 0);
-	assert(bi2 == 0);
-	assert(total == 0);
-	assert(digit1 == 0);
-	assert(digit2 == 0);
-	assert(digit3 == 0);
+		//Setup
+		bigint bi1("0");
+		bigint bi2(0);
+		bigint total = bi1 * bi2;
+		// Test
+		int digit1 = bi1[0]; 
+		int digit2 = bi2[0]; 
+		int digit3 = total[0];
+		// Verify
+		assert(bi1 == 0);
+		assert(bi2 == 0);
+		assert(total == 0);
+		assert(digit1 == 0);
+		assert(digit2 == 0);
+		assert(digit3 == 0);
 		}
-	*/
+	
 
 
 	std::cout << "Done testing subscript." << std::endl; return 0;
