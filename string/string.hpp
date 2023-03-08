@@ -14,6 +14,11 @@
 // You need to implement all of the methods and funcitons declared here.
 //
 
+//Cole Kaminski
+//February 27, 2023
+//Milestone 1, Project 1
+//Declares String class - header file
+
 #ifndef CS23001_STRING_INTERFACE_HPP
 #define CS23001_STRING_INTERFACE_HPP
 
@@ -38,7 +43,7 @@ public:
     String& operator+=    (const String&);             //Concatenation
     bool    operator==    (const String&)       const;
     bool    operator<     (const String&)       const;
-    String  substr        (int, int)            const; //Sub from staring to ending positions
+    String  substr        (int, int)            const; //Sub from starting to ending positions
     int     findch        (int,  char)          const; //Location of charater starting at a position
     int     findstr       (int,  const String&) const; //Location of string starting at a position
 
