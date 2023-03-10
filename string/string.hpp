@@ -16,7 +16,7 @@
 
 //Cole Kaminski
 //February 27, 2023
-//Milestone 1, Project 1
+//Milestone 1, Project 2
 //Declares String class - header file
 
 #ifndef CS23001_STRING_INTERFACE_HPP
