@@ -12,7 +12,7 @@ bonus: 100
 P2
 
 m1: 0 - empty string.cpp; no test files and own test cases with them -> should aim for at least 10 each, except constructors -> like empty strings, special characters, larger strings especially at or near cap, etc;
-m2: 
+m2: 0 - please format your code in a consistent way; still only m1 implementations; commit test oracles;
 m3: 
 m4: 
 
