@@ -1,175 +1,122 @@
 //Cole Kaminski
-//February 27, 2022
-//Milestone 1, Project 2
-//String CPP file - function/method definitions
+//10-March-2023
+//Milestone2Project2
+//CS23001 Creating dynamically allocated ADT
 
 #include "string.hpp"
-#include <iostream>
 
-    String::String (){                  //Empty string
-        str[0] = '\0';
-    }                            
-            
-    String::String (char x){              //String('x')
-    str[0] = x;
-    str[1]='\0';
-    }                           
 
-    String::String (const char manyChars[]){              //String("abcd")
-    int index = 0;
-        while(manyChars[index]!='\0'){
-        str[index]=manyChars[index];
-        ++index;
-        }
-    str[index]='\0';
-    }
+String::String() {				//Empty string
+	stringSize = 1;
+	str = new char[stringSize];
+	str[0] = '\0';
+};
 
-    int     String::capacity () const{                   //Max chars that can be stored
-	return STRING_SIZE -1;
-    }
-
-    int     String::length () const{              //Number of char in string
-    int index = 0;
-    while (str[index]!='\0'){
-        ++index; 
-    }
-    return index;
-    }
-  
-    char&   String::operator[] (int x){                       //Accessor/Modifier
-    return str[x];
-    }
-
-    char    String::operator[] (int x) const{                 //Accessor
-    return str[x];
-    }
-
-	String& String::operator+= (const String& rhs){             //Concatenation
-    int size = length();
-	if(((rhs.length())+size)>=STRING_SIZE){
-		std::cout<<"Cannot add two String objects that will exceed the maximum capacity able to be stored. "<<std::endl;
-		return *this;
-	}else {
-        for(int i=0; (rhs.str[i]!='\0'); ++i){
-            str[size+i]=rhs.str[i];
-        }
-        str[(size+rhs.length())]='\0';
-		return *this;
+String::String(char x) {                      //Stirng('x')
+	if (x == '\0') {
+		stringSize = 1;
+		str = new char[stringSize];
+		str[0] = '\0';
 	}
+	else {
+		stringSize = 2;
+		str = new char[stringSize];
+		str[0] = x;
+		str[1] = '\0';
 	}
+};
 
-    bool String::operator== (const String& str2) const{
-    int index = 0;
-	    while (index < length() + 1) {
-		    if (str[index] != str2[index]) {
-			    return false;
-		    }
-		    if (str[index] == '\0'){ 
-                return true;
-            }
-		    ++index;
-	    }
-	    return true;
-
-    }
-
-    String  String::substr (int start, int end) const{            //Sub from starting to ending positions
-	String subString;
+String::String(const char manyChars[]) {              //String("abcd")
 	int index = 0;
-	for(int i=start; i<=end;++i){
-	subString.str[i-start] = str[i];
-	++index;
-	}
-	subString.str[index]='\0';
-	return subString;
-    }
-
-    int String::findch (int start, char ch) const{           //Location of charater starting at a position
-	int index = start;
-	while(str[index]!='\0'){
-			if(str[index]==ch){
-				return index;
-			}
-			++index;
-		}
-		return -1;
-	}
-
-    int String::findstr (int begin, const String& str2) const{ 		//Location of string starting at a position
-	int index=-1;
-	for(int i=begin; i<length(); ++i){
-		if(str[i]==str2.str[0]){
-			index = i;
-			int x = index;
-			for(int j=0; j<str2.length(); ++j){
-				if((str[x]!=str2.str[j])){
-					index=-1;
-					break;
-				}
-				++x;
-			}
-			if(index!=(-1)){
-				return index;
-			}
-		}
-	}
-	//std::cout << "Found index: " << index << std::endl;
-	return index;
-	}
-
-    std::istream& operator>>(std::istream& stream, String& output) {
-		char arr[3000];
-		stream >> arr;
-		output=String(arr);
-		return stream;
-	}
-
-    
-    std::ostream& operator<<(std::ostream& stream, const String& output){
-		int index = 0;
-	while (output[index] != '\0') {
-		stream << output[index];
+	while (manyChars[index] != '\0') {
 		++index;
 	}
-	return stream;
-    }
+	stringSize = index + 1;
+	str = new char[stringSize];
+	index = 0;
+	while (manyChars[index] != '\0') {
+		str[index] = manyChars[index];
+		++index;
+	}
+	str[index] = '\0';
+};
 
-	bool String::operator< (const String& str2) const{
-		int i=0;
-		while((str[i]==str2.str[i])&&(str[i]!='\0')&&(str2.str[i]!='\0')){
-			++i;
-		}
-		return str[i]<str2.str[i];
-    }
+int String::capacity() const {				//Max chars that can be stored
+	return stringSize - 1;
+};
 
-	String  operator+  (String str1, const String& str2){
+int String::length()  const {	//Number of char in string
+	return capacity();
+};
+
+char& String::operator[]    (int x) {                       //Accessor/Modifier
+	return str[x];
+};
+
+char String::operator[]    (int x)  const {                       //Accessor
+	return str[x];
+};
+
+
+String& String::operator+=(const String& str2) {             //Concatenation
+	int offset = length();
+	stringSize = length() + str2.length() + 1;
+	char* tmp = new char[stringSize];
+	// copy current string
+	int index = 0;
+	while (str[index] != '\0') {
+		tmp[index] = str[index];
+		++index;
+	}
+
+	// add new stuff
+	index = 0;
+	while (str2[index] != '\0') {
+		tmp[offset + index] = str2[index];
+		++index;
+	}
+	tmp[offset + index] = '\0';
+	delete[] str;
+	str = tmp;
+	return *this;
+};
+
+String  operator+(String str1, const String& str2) {             //Concatenation
 	String str;
 	str += str1;
 	str += str2;
 	return str;
-	}
+};
 
-	bool    operator==      (const char charString[],  const String& str2){
-	String str1(charString);
-	return (str1 == str2);
-	}
 
-	bool    operator==      (char single, const String& str2){
-	String str1(single);
-	return (str1 == str2);
-	}
+// All comparison functions
 
-	bool    operator<       (const char charString[],  const String& str2){
-	String str1(charString);
-	return (str1 < str2);
+bool String::operator==(const String& str2) const {
+	int index = 0;
+	while (index < length() + 1) {
+		if (str[index] != str2[index]) {
+			return false;
+		}
+		if (str[index] == '\0') return true;
+		++index;
 	}
-	
-	bool    operator<       (char single, const String& str2){
-	String str1(single);
-	return (str1 < str2);
+	return true;
+};
+
+
+bool String::operator<(const String& str2) const {
+	int index = 0;
+	while (index < stringSize) {
+		if (str[index] != str2[index]) {
+			return (str[index] < str2[index]);
+		}
+		if (str[index] == '\0') return false;
+		++index;
 	}
-	
-	bool    operator<=      (const String& str1, const String& str2){	//how does this make sense?
+	return false;
+};
+
+bool    operator<=      (const String& str1, const String& str2) {
 	int index = 0;
 	while (index < str1.length() + 1) {
 		if (str1[index] != str2[index]) {
@@ -179,9 +126,10 @@
 		++index;
 	}
 	return true;
-	}
-	
-	bool    operator!=      (const String& str1, const String& str2){
+};
+
+
+bool    operator!=      (const String& str1, const String& str2) {
 	int index = 0;
 	while (index < str1.length() + 1) {
 		if (str1[index] != str2[index]) {
@@ -191,9 +139,10 @@
 		++index;
 	}
 	return false;
-	}
-	
-	bool    operator>=      (const String& str1, const String& str2){
+};
+
+
+bool    operator>=      (const String& str1, const String& str2) {
 	int index = 0;
 	while (index < str1.length() + 1) {
 		if (str1[index] != str2[index]) {
@@ -203,9 +152,10 @@
 		++index;
 	}
 	return true;
-	}
-	
-	bool    operator>       (const String& str1, const String& str2){
+};
+
+
+bool    operator>       (const String& str1, const String& str2) {
 	int index = 0;
 	while (index < str1.length() + 1) {
 		if (str1[index] != str2[index]) {
@@ -215,4 +165,134 @@
 		++index;
 	}
 	return false;
+};
+
+//start of free function comparisons
+
+bool    operator==      (const char charString[], const String& str2) {
+	String str1(charString);
+	return (str1 == str2);
+};
+
+bool    operator==      (char charString, const String& str2) {
+	String str1(charString);
+	return (str1 == str2);
+};
+
+bool    operator<       (const char charString[], const String& str2) {
+	String str1(charString);
+	return (str1 < str2);
+};
+
+bool    operator<       (char charString, const String& str2) {
+	String str1(charString);
+	return (str1 < str2);
+};
+
+//End of comparison functions
+
+
+String  String::substr(int begin, int end) const {//Sub from staring to ending positions
+	String subString;
+	delete[] subString.str;
+	subString.stringSize = (end - begin) + 2;
+	subString.str = new char[subString.stringSize];
+	int i = 0;
+	while (begin + i <= end) {
+		subString[i] = str[begin + i];
+		++i;
 	}
+	subString[i] = '\0';
+	return subString;			//returns string of chars inbetween two index points
+};
+
+int String::findch(int begin, char ch) const {			 //Location of charater starting at a position
+	int i = begin;
+	while (i < stringSize) {
+		if (str[i] == ch) {
+			return i;
+		}
+		++i;
+	}
+	return -1;
+};
+
+int String::findstr(int begin, const String& str2) const {		 //Location of string starting at a position
+	int i = begin;
+	int str2Length = str2.length();
+	while (i < stringSize) {
+		for (int str2index = 0; str2index < str2Length; ++str2index) {
+			if (str2[str2index] != str[i + str2index]) {
+				break;
+			}
+			else if (str2index + 1 == str2Length) {
+				return i;
+			}
+			else if (i + str2index + 1 == stringSize) {
+				return-1;
+			}
+		}
+		++i;
+	}
+	return -1;
+};
+
+std::istream& operator>>(std::istream& stream, String& output) {
+	char letter[256];
+
+	stream >> letter;
+	int index = 0;
+	do {
+		++index;
+	} while (letter[index] != '\0');
+	delete[] output.str;
+	output.stringSize = index + 1;
+	output.str = new char[output.stringSize];
+	index = 0;
+	do {
+		output[index] = letter[index];
+		++index;
+	} while (letter[index] != '\0');
+	output[index] = '\0';
+	return stream;
+};
+
+
+
+std::ostream& operator<<(std::ostream& stream, const String& input) {
+
+	int index = 0;
+	while (input[index] != '\0') {
+		stream << input[index];
+		++index;
+	}
+	return stream;
+};
+
+//MILESTONE 2 FUNCTION DEFS
+
+String::String(const String& rhs) {                  //Copy Constructor
+	stringSize = rhs.stringSize;
+	str = new char[stringSize];
+	for (int i = 0; i < stringSize; ++i) {
+		str[i] = rhs[i];
+	}
+};
+
+String::~String() {                               //Destructor
+	delete[] str;
+};
+
+void String::swap(String& rhs) {                        //Constant time swap
+	char* ptr = rhs.str;
+	int tmp = rhs.stringSize;
+	rhs.str = str;
+	rhs.stringSize = stringSize;
+	str = ptr;
+	stringSize = tmp;
+};
+
+String& String::operator=(String rhs) {                //Assignment Copy
+	swap(rhs);
+	return *this;
+};
