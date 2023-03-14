@@ -123,7 +123,7 @@ oracle: $(CTOR) $(REL) $(COPY) $(OPS)
 	./testoracle_substring
 	./testoracle_find_char 
 	./testoracle_find_string 
-#	./testoracle_split
+#./testoracle_split
 
 ###############################################################
 # Run test oracle with valgrind for Milestone 2 and 3
