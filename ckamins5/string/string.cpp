@@ -296,3 +296,38 @@ String& String::operator=(String rhs) {                //Assignment Copy
 	swap(rhs);
 	return *this;
 };
+
+//MILESTONE 3 FUNCTION DEF
+
+std::vector<String> String::split(char splitChar) const {
+	int begin = 0, end = 0;
+	std::vector<String> output;
+
+	while (end != -1) {
+		end = findch(begin, splitChar);
+		if (end != -1) {
+			String element = substr(begin, end - 1);
+			output.push_back(element);
+			begin = end + 1;
+		}
+		else {
+			String element = substr(begin, length() - 1);
+			output.push_back(element);
+		}
+	}
+	return output;
+};
+
+//MILESTONE 4 FUNCTION
+
+int String::toInt() {
+	int result = 0;
+	int place = 1;
+	int len = length() - 1;
+	while (len >= 0) {
+		result += (place * int(char(str[len] - 48)));
+		--len;
+		place *= 10;
+	}
+	return result;
+};
