@@ -45,7 +45,7 @@ MYM2   = test_ctor_copy test_swap_assign
 CTOR = testoracle_ctor_default testoracle_ctor_char  testoracle_ctor_charArray 
 REL  = testoracle_equal testoracle_lessThan 
 COPY = testoracle_ctor_copy testoracle_assign testoracle_swap_assign
-OPS  = testoracle_concat testoracle_subscript testoracle_len_cap testoracle_input testoracle_find_char testoracle_find_string testoracle_substring 
+OPS  = testoracle_concat testoracle_subscript testoracle_len_cap testoracle_input testoracle_find_char testoracle_find_string testoracle_substring testoracle_split
 
 
 ###############################################################
@@ -88,7 +88,7 @@ tests: $(MYCTOR) $(MYOPS) $(MYREL) $(MYM2)
 	./test_substring
 #Milestone 2
 	./test_ctor_copy 
-	./test_swap_assign 
+	./test_swap_assign
 
 
 
@@ -123,7 +123,7 @@ oracle: $(CTOR) $(REL) $(COPY) $(OPS)
 	./testoracle_substring
 	./testoracle_find_char 
 	./testoracle_find_string 
-#./testoracle_split
+	./testoracle_split
 
 ###############################################################
 # Run test oracle with valgrind for Milestone 2 and 3
@@ -145,7 +145,7 @@ oracle-mem: $(CTOR) $(REL) $(COPY) $(OPS)
 	valgrind ./testoracle_substring
 	valgrind ./testoracle_find_char 
 	valgrind ./testoracle_find_string 
-#	valgrind ./testoracle_split
+	valgrind ./testoracle_split
 
 
 ###############################################################
