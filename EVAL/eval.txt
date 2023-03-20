@@ -12,7 +12,7 @@ bonus: 100
 P2
 
 m1: 85 (regrade) - fails in concat instructor tests -> seg fault;
-m2: 0 - please format your code in a consistent way; still only m1 implementations; commit test oracles;
+m2: 50 (regrade) - no oracles to run;
 m3: 0 - no split implementation; no split test cases; no oracles committed;
 m4: 
 
