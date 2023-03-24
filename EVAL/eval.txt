@@ -14,7 +14,7 @@ P2
 m1: 85 (regrade) - fails in concat instructor tests -> seg fault;
 m2: 50 (regrade) - no oracles to run;
 m3: 0 - no split implementation; no split test cases; no oracles committed;
-m4: 
+m4: 90 - only makes it like 1/4 of the way through largest file;
 
 bonus: 
 
