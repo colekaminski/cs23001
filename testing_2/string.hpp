@@ -1,23 +1,15 @@
 #ifndef JM_NEWSTR_H_
 #define JM_NEWSTR_H_
 
-//File:        string.h   
-//       
+//File:        string.h      
 //Version:     1.0
 //Date:        9/5/2013 - Current Version Kent State University
-
 //Author:      Dr. J. Maletic
-//
 //Description: Class definition for a String.
-//
-//
 //  Class: String 
-//
 //  Simple version with fixed sized array of char.  
-//
 //  Defines a character String data type with associated operators.
 //  Examples:  String a;              //of capacity DEFAULT_STRING_CAPACITY
-//
 //  - Strings are indexed from 0 to capacity-1 of char.
 //  - a = ""; assigns a to the empty String.
 
@@ -34,17 +26,31 @@ const int DEFAULT_STRING_CAPACITY = 256;
 class String {
 public: 
             String        ();               
-            String        (const char*); 
-            String        (const char);  
-
-    bool    operator<     (const String&)           const;
+            String        (const char[]); 
+            String        (char);
     
+    bool operator==       (const String&)           const;  
+            
+    bool    operator<     (const String&)           const;
+    int length () const;
+    char&   operator[]    (int);                            //Accessor/Modifier
+    char    operator[]    (int)                     const;
+
+
+    friend  std::ostream& operator<<(std::ostream&, const String&);
+    friend  std::istream& operator>>(std::istream&, String&);
+
 private:  
     char    str[DEFAULT_STRING_CAPACITY];  
 };
 
+
+
+
 std::istream& operator>>(std::istream&, String&);
 
+bool operator==       (const char, const String&);
+bool operator==       (char, const String&);  
 bool    operator<      (const char*,   const String&);
 bool    operator<      (const char,    const String&);
 
