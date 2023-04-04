@@ -15,14 +15,14 @@ OPTIONS = -g -Wall -W -Wunused -Wuninitialized -Wshadow -std=c++11
 
 # Names of your test files - add them in as you build them.
 # Names must start with "test_"
-MYTESTS = test_lessThan #test_default_ctor test_ctor_charArray 
+MYTESTS = test_lessThan test_default_ctor test_ctor_charArray 
 
 
 # Names of test oracle files 
-CTOR = #testoracle_ctor_default testoracle_ctor_int testoracle_ctor_char testoracle_ctor_charArray_int testoracle_ctor_charArray
+CTOR = testoracle_ctor_default testoracle_ctor_int testoracle_ctor_char testoracle_ctor_charArray_int testoracle_ctor_charArray
 REL  = testoracle_lessThan
-COPY = #testoracle_ctor_copy testoracle_assign
-OPS  = #testoracle_concat
+COPY = testoracle_ctor_copy testoracle_assign
+OPS  = testoracle_concat
 
 ###############################################################
 # Compile just the string
@@ -55,9 +55,10 @@ string: string.o
 # For example: ./test_plus
 #
 tests: $(MYTESTS)
-	#./test_default_ctor
-	#./test_c_str_ctor
+	./test_default_ctor
+	./test_c_str_ctor
 	./test_lessThan
+	./test_ctor_charArray
     #ADD YOUR TESTS HERE ***************
     
     
