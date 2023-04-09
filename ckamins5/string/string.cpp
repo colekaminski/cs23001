@@ -236,7 +236,7 @@ int String::findstr(int begin, const String& str2) const {		 //Location of strin
 	}
 	return -1;
 };
-/*
+
 std::istream& operator>>(std::istream& stream, String& output) {
 	char letter[256];
 
@@ -256,7 +256,7 @@ std::istream& operator>>(std::istream& stream, String& output) {
 	output[index] = '\0';
 	return stream;
 };
-*/
+
 
 
 std::ostream& operator<<(std::ostream& stream, const String& input) {
