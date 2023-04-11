@@ -21,7 +21,7 @@ bonus:
 P3
 
 m1: 0 - no assembler folder;
-m2: 
+m2: 60 - postfix expressions wrong; nothing written to output file when given one; no own data test file; missing labels in output, and outputing infix expression for each, space seperating each infix/postfix pair;
 m3: 
 
 bonus: 
