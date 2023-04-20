@@ -26,7 +26,9 @@ int main(int argc, char const* argv[]) {
 		}
 		input += ";";
 		*postfixFile << "infix: " << input << std::endl;
-		*postfixFile << "postfix: " << inFixToPostfix(input) << std::endl;
-		*postfixFile << std::endl;
+        String postfixExpr = inFixToPostfix(input);
+		*postfixFile << "postfix: " << postfixExpr << std::endl << std::endl;
+		postfixToAssembly(postfixExpr, postfixFile);
+        *postfixFile << std::endl;
 	}
 }
