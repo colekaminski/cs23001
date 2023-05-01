@@ -8,7 +8,7 @@
 //  srcML 1.0
 //
 //  Modified by: Cole Kaminski
-//  04/30/2023
+//
 //
 
 #include "ASTree.hpp"
@@ -94,6 +94,11 @@ void srcML::lineCount(const std::string& profileName) {
 	tree->lineCount(profileName);
 }
 
+// Inserts a profile.count() for each statement.
+//
+void srcML::conditionCount(const std::string& profileName) {
+	tree->conditionCount(profileName);
+}
 
 
 //
@@ -417,12 +422,32 @@ void AST::lineCount(const std::string& profileName) {
 
 }
 
+//Extra credit function
+void AST::conditionCount(const std::string& profileName) {
+
+	std::list<AST*>::iterator ip = child.begin();
+	while (ip != child.end()) {
+
+		if ((*ip)->nodeType == category) {
+			if ((*ip)->tag == "condition") {
+				(*ip)->child.insert(--(*ip)->child.end(), new AST(token, " & " + profileName + ".count(__LINE__)"));
+				(*ip)->conditionCount(profileName);
+			}
+			else if (!isStopTag((*ip)->tag)) {
+				(*ip)->conditionCount(profileName);
+			}
+		}
+		ip++;
+	}
+
+}
+
 // Returns TRUE if the tag (syntactic category) is not to be profiled
 //
 // IMPORTANT for milestone 3
 //
 bool isStopTag(std::string tag) {
-	if (tag == "condition") return true; //Remove for challenge
+	// if (tag == "condition") return true; //Remove for challenge
 	if (tag == "type") return true;
 	if (tag == "name") return true;
 	if (tag == "return") return true;

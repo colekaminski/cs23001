@@ -7,7 +7,7 @@
 //  Spring 2023
 //  srcML 1.0
 //
-//  Modified by:
+//  Modified by: Cole Kaminski
 //
 //
 
@@ -22,14 +22,14 @@
 // Simple function to exercise/test copy-ctor, dtor, swap, assignment.
 //
 void testCopyAssign(srcML p) {
-    std::cout << "The orginal code: " <<std::endl;
-    std::cout << "------------------------------------------------" <<std::endl;
+    std::cout << "The orginal code: " << std::endl;
+    std::cout << "------------------------------------------------" << std::endl;
     std::cout << p;   //Should print out same code as printed in main.
-    std::cout << "------------------------------------------------" <<std::endl;
-    std::cout << "No code: " <<std::endl;
+    std::cout << "------------------------------------------------" << std::endl;
+    std::cout << "No code: " << std::endl;
     p = srcML();      //Should print out nothing.
     std::cout << p;
-    std::cout << "------------------------------------------------" <<std::endl;
+    std::cout << "------------------------------------------------" << std::endl;
 }
 
 
@@ -39,7 +39,7 @@ void testCopyAssign(srcML p) {
 // Example: profile main.cpp.xml utils.cpp.xml
 // Results: p-main.cpp p-utlis.cpp
 //
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     if (argc < 2) {
         std::cerr << "Error: Input file(s) are required." << std::endl;
         std::cerr << "       The main must be the first argument followed by ";
@@ -72,6 +72,7 @@ int main(int argc, char *argv[]) {
     code.mainReport(profileName);             //Add in the report
     code.functionCount(profileName[0]);       //Count funciton invocations
     code.lineCount(profileName[0]);           //Count line invocations
+    code.conditionCount(profileName[0]);
 
     std::string outFileName;
     outFileName = "p-" + fileName[0];
@@ -87,6 +88,7 @@ int main(int argc, char *argv[]) {
         code.fileHeader(profileName[i]);       //Add in file header info
         code.functionCount(profileName[i]);    //Count funciton invocations
         code.lineCount(profileName[i]);        //Count line invocations
+        code.conditionCount(profileName[i]);        //Count line invocations
 
         outFileName = "p-" + fileName[i];
         outFile.open(outFileName.c_str());

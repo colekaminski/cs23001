@@ -30,7 +30,7 @@ extern profile sort_lib_cpp;
 void quick_sort(std::vector<int>& data)
 { sort_lib_cpp.count(__LINE__, "quick_sort");
     // Do nothing if empty vector
-    if (data.size() == 0)
+    if (data.size() == 0 & sort_lib_cpp.count(__LINE__))
         { return; }
 
     // Do the sort
@@ -48,15 +48,15 @@ void quick_sort(std::vector<int>& data, int left, int right)
       // Partition
       int idx = left;
       int jdx = right;
-      while (idx <= jdx) {
-            while (LESS_THAN(data[Vec_Idx(idx)], pivot)) {
+      while (idx <= jdx & sort_lib_cpp.count(__LINE__)) {
+            while (LESS_THAN(data[Vec_Idx(idx)], pivot) & sort_lib_cpp.count(__LINE__)) {
                 idx++; sort_lib_cpp.count(__LINE__);
             }
-            while (GREATER_THAN(data[Vec_Idx(jdx)], pivot)) {
+            while (GREATER_THAN(data[Vec_Idx(jdx)], pivot) & sort_lib_cpp.count(__LINE__)) {
                 jdx--; sort_lib_cpp.count(__LINE__);
             }
 
-            if (idx <= jdx)
+            if (idx <= jdx & sort_lib_cpp.count(__LINE__))
             {
                   SWAP(data[Vec_Idx(idx)], data[Vec_Idx(jdx)]); sort_lib_cpp.count(__LINE__);
                   idx++; sort_lib_cpp.count(__LINE__);
@@ -65,10 +65,10 @@ void quick_sort(std::vector<int>& data, int left, int right)
       }
 
       // Recurse
-      if (left < jdx)
+      if (left < jdx & sort_lib_cpp.count(__LINE__))
             { quick_sort(data, left, jdx); sort_lib_cpp.count(__LINE__); }
 
-      if (idx < right)
+      if (idx < right & sort_lib_cpp.count(__LINE__))
             { quick_sort(data, idx, right); sort_lib_cpp.count(__LINE__); }
 }
 
@@ -76,20 +76,20 @@ void quick_sort(std::vector<int>& data, int left, int right)
 void selection_sort(std::vector<int>& data)
 { sort_lib_cpp.count(__LINE__, "selection_sort");
     // Do nothing if empty vector (note unsigned 0 - 1 is a big number)
-    if (data.size() == 0)
+    if (data.size() == 0 & sort_lib_cpp.count(__LINE__))
         { return; }
 
     // Index of last element in vector, also last in unsorted part
     Vec_Idx last = data.size() - 1;
 
     // Do the sort
-    while (last > 0)
+    while (last > 0 & sort_lib_cpp.count(__LINE__))
     {
         // Find greatest in unsorted part
         Vec_Idx idx_of_greatest = 0;
-        for (Vec_Idx idx = 0; idx <= last; ++idx)
+        for (Vec_Idx idx = 0; idx <= last & sort_lib_cpp.count(__LINE__); ++idx)
         {
-            if ( LESS_THAN(data[idx_of_greatest], data[idx]) )
+            if ( LESS_THAN(data[idx_of_greatest], data[idx])  & sort_lib_cpp.count(__LINE__))
             {
                 // Remember as new greatest so far
                 idx_of_greatest = idx; sort_lib_cpp.count(__LINE__);
@@ -108,12 +108,12 @@ void selection_sort(std::vector<int>& data)
 void bubble_sort(std::vector<int>& data)
 { sort_lib_cpp.count(__LINE__, "bubble_sort");
     // Go through vector repeatedly
-    for(Vec_Idx limit = data.size(); limit > 0; limit--)
+    for(Vec_Idx limit = data.size(); limit > 0 & sort_lib_cpp.count(__LINE__); limit--)
     {
         // Go through vector once, swap element and next element if out of order
-        for(Vec_Idx idx = 0; idx < limit - 1; idx++)
+        for(Vec_Idx idx = 0; idx < limit - 1 & sort_lib_cpp.count(__LINE__); idx++)
         {
-            if( LESS_THAN(data[idx + 1], data[idx]) )
+            if( LESS_THAN(data[idx + 1], data[idx])  & sort_lib_cpp.count(__LINE__))
             {
                 SWAP(data[idx],data[idx + 1]); sort_lib_cpp.count(__LINE__);
             }
