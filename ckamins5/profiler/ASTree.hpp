@@ -24,10 +24,10 @@
 #include <algorithm>
 
 
-bool                     isStopTag (std::string);
-std::string              readUntil (std::istream&, char);
-std::string              unEscape  (std::string);
-std::vector<std::string> tokenize  (const std::string& s);
+bool                     isStopTag(std::string);
+std::string              readUntil(std::istream&, char);
+std::string              unEscape(std::string);
+std::vector<std::string> tokenize(const std::string& s);
 
 
 // AST nodes can be one of three things.
@@ -35,7 +35,7 @@ std::vector<std::string> tokenize  (const std::string& s);
 // token      - a source code token
 // whitespace - blanks, tabs, line returns, etc.
 //
-enum nodes {category, token, whitespace};
+enum nodes { category, token, whitespace };
 
 // An AST is either a:
 //     -Syntactic category node
@@ -49,29 +49,32 @@ enum nodes {category, token, whitespace};
 //
 class AST {
 public:
-                  AST           () {};
-                  AST           (nodes t) : nodeType(t) {};
-                  AST           (nodes t, const std::string&);
-                  ~AST          ();
-                  AST           (const AST&);
-    void          swap          (AST&);
-    AST&          operator=     (AST);
+    AST() {};
+    AST(nodes t) : nodeType(t) {};
+    AST(nodes t, const std::string&);
+    ~AST();
+    AST(const AST&);
+    void          swap(AST&);
+    AST& operator=     (AST);
 
-    AST*          getChild      (std::string);
-    std::string   getName       () const;
-    void          mainHeader    (const std::vector<std::string>&,
-                                 const std::vector<std::string>&);
-    void          fileHeader    (const std::string&);
-    void          mainReport    (const std::vector<std::string>&);
-    void          functionCount (const std::string&);
-    void          lineCount     (const std::string&);
-    std::ostream& print         (std::ostream&) const;
-    std::istream& read          (std::istream&);
-    
+    AST* getChild(std::string);
+    std::string   getName() const;
+    void          mainHeader(const std::vector<std::string>&,
+        const std::vector<std::string>&);
+    void          fileHeader(const std::string&);
+    void          mainReport(const std::vector<std::string>&);
+    void          functionCount(const std::string&);
+    void          lineCount(const std::string&);
+    //Extra credit
+    void          conditionCount(const std::string&);
+
+    std::ostream& print(std::ostream&) const;
+    std::istream& read(std::istream&);
+
 private:
     nodes           nodeType;       //Category, Token, or Whitespace
     std::string     tag,            //Category: the tag name and
-                    closeTag;       //          closing tag.
+        closeTag;       //          closing tag.
     std::list<AST*> child;          //Category: A list of subtrees.
     std::string     text;           //Token/Whitespace: the text.
 };
@@ -82,24 +85,25 @@ private:
 //
 class srcML {
 public:
-            srcML         () : tree(0) {};
-            ~srcML        () {delete tree;};
-            srcML         (const srcML&);
-    void    swap          (srcML&);
-    srcML&  operator=     (srcML);
-    void    mainHeader    (const std::vector<std::string>&,
-                           const std::vector<std::string>&);
-    void    fileHeader    (const std::string&);
-    void    mainReport    (const std::vector<std::string>&);
-    void    functionCount (const std::string&);
-    void    lineCount     (const std::string&);
-    
+    srcML() : tree(0) {};
+    ~srcML() { delete tree; };
+    srcML(const srcML&);
+    void    swap(srcML&);
+    srcML& operator=     (srcML);
+    void    mainHeader(const std::vector<std::string>&,
+        const std::vector<std::string>&);
+    void    fileHeader(const std::string&);
+    void    mainReport(const std::vector<std::string>&);
+    void    functionCount(const std::string&);
+    void    lineCount(const std::string&);
+    void    conditionCount(const std::string&);
+
     friend  std::istream& operator>>(std::istream&, srcML&);
-    friend  std::ostream& operator<<(std::ostream&, const srcML&); 
-    
+    friend  std::ostream& operator<<(std::ostream&, const srcML&);
+
 private:
     std::string header;
-    AST*        tree;
+    AST* tree;
 };
 
 

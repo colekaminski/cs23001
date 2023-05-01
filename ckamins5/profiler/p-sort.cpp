@@ -45,20 +45,20 @@ int main(int argc, char* argv[])
     generate_random_data(data, opts._data_size, opts._seed, opts._mod); sort_cpp.count(__LINE__);
 
     // Output data before sorting
-    if(opts._output_data)
+    if(opts._output_data & sort_cpp.count(__LINE__))
         { cout << "\nData Before: "; sort_cpp.count(__LINE__); output_data(data); sort_cpp.count(__LINE__); } 
 
     // Sort, if a sort was specified, there is no default
-    if (opts._quick_sort)     { quick_sort(data); sort_cpp.count(__LINE__);      }
-    if (opts._selection_sort) { selection_sort(data); sort_cpp.count(__LINE__);  }
-    if (opts._bubble_sort)    { bubble_sort(data); sort_cpp.count(__LINE__);     }
+    if (opts._quick_sort & sort_cpp.count(__LINE__))     { quick_sort(data); sort_cpp.count(__LINE__);      }
+    if (opts._selection_sort & sort_cpp.count(__LINE__)) { selection_sort(data); sort_cpp.count(__LINE__);  }
+    if (opts._bubble_sort & sort_cpp.count(__LINE__))    { bubble_sort(data); sort_cpp.count(__LINE__);     }
     if ( !opts._quick_sort      &&
          !opts._selection_sort  &&
-         !opts._bubble_sort  )
+         !opts._bubble_sort   & sort_cpp.count(__LINE__))
         { output_error_and_exit("No sort specified."); sort_cpp.count(__LINE__); }
 
     // Output data after sorting
-    if(opts._output_sorted_data)
+    if(opts._output_sorted_data & sort_cpp.count(__LINE__))
         { cout << "\nData After: "; sort_cpp.count(__LINE__); output_data(data); sort_cpp.count(__LINE__); } 
 
     std::cout << sort_cpp << std::endl;
@@ -77,9 +77,9 @@ void generate_random_data(vector<int>& vec, int size, int seed, int mod)
     srandom(static_cast<unsigned int>(seed)); sort_cpp.count(__LINE__);
 
     // Put random values in vector
-    for (vector<int>::size_type idx = 0; idx < vec.size(); ++idx)
+    for (vector<int>::size_type idx = 0; idx < vec.size() & sort_cpp.count(__LINE__); ++idx)
     {
-        if(mod) { vec[idx] = random() % mod; sort_cpp.count(__LINE__); }
+        if(mod & sort_cpp.count(__LINE__)) { vec[idx] = random() % mod; sort_cpp.count(__LINE__); }
         else    { vec[idx] = random(); sort_cpp.count(__LINE__);       }
     }
 }
@@ -92,10 +92,10 @@ void output_data(const vector<int>& vec)
     const int width = 10;
 
     // Output vector elements
-    for (vector<int>::size_type idx = 0; idx < vec.size(); ++idx)
+    for (vector<int>::size_type idx = 0; idx < vec.size() & sort_cpp.count(__LINE__); ++idx)
     {
         // Output newline to end row
-        if ( ! (idx % cols) )
+        if ( ! (idx % cols)  & sort_cpp.count(__LINE__))
            { cout  << "\n"; sort_cpp.count(__LINE__); }
 
         cout << std::setw(width) << vec[idx] << " "; sort_cpp.count(__LINE__);
@@ -111,35 +111,35 @@ void output_data(const vector<int>& vec)
 void process_command_line(Options& opts, int argc, char* argv[])
 { sort_cpp.count(__LINE__, "process_command_line");
     // Useage message if no command line args
-    if (argc == 1)
+    if (argc == 1 & sort_cpp.count(__LINE__))
         { output_usage_and_exit(argv[0]); sort_cpp.count(__LINE__); }
 
     // Go through the argumets
-    for (int idx = 1; idx < argc; ++idx)
+    for (int idx = 1; idx < argc & sort_cpp.count(__LINE__); ++idx)
     {
         // Standard library string from C-string
         string opt(argv[idx]);
 
         // Process the option
-        if (opt == "-h")   { output_usage_and_exit(argv[0]); sort_cpp.count(__LINE__); }
-        if (opt == "-qs")  { opts._quick_sort         = true; sort_cpp.count(__LINE__);  }
-        if (opt == "-ss")  { opts._selection_sort     = true; sort_cpp.count(__LINE__);  }
-        if (opt == "-bs")  { opts._bubble_sort        = true; sort_cpp.count(__LINE__);  }
-        if (opt == "-od")  { opts._output_data        = true; sort_cpp.count(__LINE__);  }
-        if (opt == "-osd") { opts._output_sorted_data = true; sort_cpp.count(__LINE__);  }
-        if (opt == "-sz")
+        if (opt == "-h" & sort_cpp.count(__LINE__))   { output_usage_and_exit(argv[0]); sort_cpp.count(__LINE__); }
+        if (opt == "-qs" & sort_cpp.count(__LINE__))  { opts._quick_sort         = true; sort_cpp.count(__LINE__);  }
+        if (opt == "-ss" & sort_cpp.count(__LINE__))  { opts._selection_sort     = true; sort_cpp.count(__LINE__);  }
+        if (opt == "-bs" & sort_cpp.count(__LINE__))  { opts._bubble_sort        = true; sort_cpp.count(__LINE__);  }
+        if (opt == "-od" & sort_cpp.count(__LINE__))  { opts._output_data        = true; sort_cpp.count(__LINE__);  }
+        if (opt == "-osd" & sort_cpp.count(__LINE__)) { opts._output_sorted_data = true; sort_cpp.count(__LINE__);  }
+        if (opt == "-sz" & sort_cpp.count(__LINE__))
         {
-            if (idx + 1 < argc) { ++idx; sort_cpp.count(__LINE__); opts._data_size = atoi(argv[idx]); sort_cpp.count(__LINE__); }
+            if (idx + 1 < argc & sort_cpp.count(__LINE__)) { ++idx; sort_cpp.count(__LINE__); opts._data_size = atoi(argv[idx]); sort_cpp.count(__LINE__); }
             else                { output_error_and_exit("Value for -sz option is missing."); sort_cpp.count(__LINE__); }
         }
-        if (opt == "-rs")
+        if (opt == "-rs" & sort_cpp.count(__LINE__))
         {
-            if (idx + 1 < argc) { ++idx; sort_cpp.count(__LINE__); opts._seed = atoi(argv[idx]); sort_cpp.count(__LINE__); }
+            if (idx + 1 < argc & sort_cpp.count(__LINE__)) { ++idx; sort_cpp.count(__LINE__); opts._seed = atoi(argv[idx]); sort_cpp.count(__LINE__); }
             else                { output_error_and_exit("Value for -rs option is missing."); sort_cpp.count(__LINE__); }
         }
-        if (opt == "-mod")
+        if (opt == "-mod" & sort_cpp.count(__LINE__))
         {
-            if (idx + 1 < argc) { ++idx; sort_cpp.count(__LINE__); opts._mod = atoi(argv[idx]); sort_cpp.count(__LINE__); }
+            if (idx + 1 < argc & sort_cpp.count(__LINE__)) { ++idx; sort_cpp.count(__LINE__); opts._mod = atoi(argv[idx]); sort_cpp.count(__LINE__); }
             else                { output_error_and_exit("Value for -mod option is missing."); sort_cpp.count(__LINE__); }
         }
         if ( (opt != "-h")   &&
@@ -150,7 +150,7 @@ void process_command_line(Options& opts, int argc, char* argv[])
              (opt != "-osd") &&
              (opt != "-sz")  &&
              (opt != "-rs")  &&
-             (opt != "-mod") )
+             (opt != "-mod")  & sort_cpp.count(__LINE__))
         {
            output_error_and_exit(string("Error: Bad option: ") + opt); sort_cpp.count(__LINE__);
         }

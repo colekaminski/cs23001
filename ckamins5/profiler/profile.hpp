@@ -4,7 +4,7 @@
 //  Created by Jonathan Maletic.
 //  Copyright 2023 Kent State University. All rights reserved.
 //  Spring 2023
-//  Modified by:
+//  Modified by: Cole Kaminski
 //
 
 #ifndef INCLUDES_PROFILE_H_
@@ -31,10 +31,10 @@ std::string intToString(long);
 // 
 class profile {
 public:
-           profile (std::string fn="") : filename(fn)      {};
-    void   count   (int line, const std::string& function) { stmt[intToString(line) + " " + function] += 1; }
-    void   count   (int line)                              { stmt[intToString(line)] += 1; }
-    
+    profile(std::string fn = "") : filename(fn) {};
+    void   count(int line, const std::string& function) { stmt[intToString(line) + " " + function] += 1; }
+    bool   count(int line) { stmt[intToString(line)] += 1; return true; }
+
     friend std::ostream& operator<< (std::ostream&, const profile&);
 private:
     std::string                 filename;
