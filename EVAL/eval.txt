@@ -20,15 +20,15 @@ bonus:
 
 P3
 
-m1: 0 - no assembler folder;
-m2: 60 - postfix expressions wrong; nothing written to output file when given one; no own data test file; missing labels in output, and outputing infix expression for each, space seperating each infix/postfix pair;
-m3: 0 - no m3 work;
+m1: 90 (regrade)
+m2: 90 (regrade)
+m3: 90 (regrade)
 
 bonus: 
 
 P4
 
-m1: 0 - no profiler folder;
+m1: 60 (regrade) - for ./profiler no cout from function in main testing implementations;
 m2: 100
 m3: 
 
